@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书籍详情 - 云间书阁</title>
+    <link rel="stylesheet" href="detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="user-status">
+                <div id="userInfo">
+                    <!-- 用户信息将通过JavaScript动态插入 -->
+                </div>
+                <div class="nav-links">
+                    <a href="cart.html" id="cartLink">购物车</a>
+                    <a href="../SEARCH/index.html">返回首页</a>
+                </div>
+            </div>
+            <h1><a href="../SEARCH/index.html">云间书阁</a></h1>
+        </div>
+    </header>
+
+    <main class="book-detail">
+        <div class="container">
+            <div class="book-details">
+                <div class="book-cover">
+                    <img src="" alt="">
+                </div>
+                <div class="book-info">
+                    <div class="book-info-top">
+                        <h1 class="book-title"></h1>
+                        <p class="book-author"></p>
+                        <p class="book-publisher"></p>
+                        <p class="book-isbn"></p>
+                        <p class="book-category"></p>
+                        <p class="book-stock"></p>
+                    </div>
+                    <div class="book-price"></div>
+                    <div class="book-description"></div>
+                    <button class="buy-button">加入购物车</button>
+                </div>
+            </div>
+            <div class="book-comments">
+                <h3>读者评论</h3>
+                <div id="commentsList"></div>
+                <div class="comment-form" id="commentForm">
+                    <textarea id="commentText" placeholder="写下你的评论..."></textarea>
+                    <button onclick="submitComment()">发表评论</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2024 云间书阁 - 让阅读成为一种享受</p>
+    </footer>
+
+    <script src="../SEARCH/search.js"></script>
+    <script src="detail.js"></script>
+</body>
+</html> 

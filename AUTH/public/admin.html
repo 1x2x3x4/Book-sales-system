@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员后台</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .admin-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>管理员后台</h1>
+        <div class="admin-info" id="adminInfo">
+            <p>欢迎，管理员</p>
+        </div>
+        <button id="logoutButton">退出登录</button>
+    </div>
+
+    <script>
+        // 登出功能
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            if (confirm('确认退出登录吗？')) {
+                document.cookie = 'rememberMe=; max-age=0'; // 清除 Cookie
+                window.location.href = 'login.html'; // 重定向到登录页面
+            }
+        });
+    </script>
+</body>
+</html>

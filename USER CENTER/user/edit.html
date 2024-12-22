@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改个人信息 - 云间书阁</title>
+    <link rel="stylesheet" href="edit.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="edit-container">
+        <h1 class="page-title">修改个人信息</h1>
+        <form class="edit-form" id="editForm">
+            <div class="avatar-section">
+                <div class="avatar-preview">
+                    <img src="" alt="头像预览" id="avatarPreview" style="display: none;">
+                    <span>头像预览</span>
+                </div>
+                <div class="avatar-upload">
+                    <label class="upload-btn">
+                        选择头像
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                    </label>
+                    <span class="upload-tip">支持 jpg、png 格式，文件大小不超过 2M</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">新用户名</label>
+                <input type="text" id="username" name="username" placeholder="请输入新用户名">
+            </div>
+
+            <div class="form-group">
+                <label for="password">新密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入新密码">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">确认新密码</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入新密码">
+            </div>
+
+            <div class="form-group">
+                <label for="email">新邮箱</label>
+                <input type="email" id="email" name="email" placeholder="请输入新邮箱">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">新联系方式</label>
+                <input type="tel" id="phone" name="phone" placeholder="请输入新联系方式">
+            </div>
+
+            <div class="form-group">
+                <label for="address">新地址</label>
+                <input type="text" id="address" name="address" placeholder="请输入新地址">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">保存修改</button>
+                <button type="button" class="cancel-btn" onclick="window.history.back()">取消</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // 头像预览功能
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('avatarPreview');
+            const previewText = preview.nextElementSibling;
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    previewText.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 表单提交处理
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // 验证密码
+            if (data.password !== data.confirmPassword) {
+                alert('两次输入的密码不一致！');
+                return;
+            }
+            
+            // TODO: 发送到服务器
+            console.log('表单数据:', data);
+            alert('修改成功！');
+            window.location.href = 'user.html';
+        });
+
+        // 页面加载时加载用户现有信息
+        document.addEventListener('DOMContentLoaded', function() {
+            // TODO: 从服务器获取用户信息
+            const userInfo = {
+                username: localStorage.getItem('username'),
+                email: localStorage.getItem('email'),
+                phone: localStorage.getItem('phone'),
+                address: localStorage.getItem('address')
+            };
+
+            // 填充表单
+            if (userInfo.username) document.getElementById('username').value = userInfo.username;
+            if (userInfo.email) document.getElementById('email').value = userInfo.email;
+            if (userInfo.phone) document.getElementById('phone').value = userInfo.phone;
+            if (userInfo.address) document.getElementById('address').value = userInfo.address;
+
+            // 加载头像
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                const preview = document.getElementById('avatarPreview');
+                preview.src = savedAvatar;
+                preview.style.display = 'block';
+                preview.nextElementSibling.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

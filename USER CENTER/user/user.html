@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>用户主页</title>
+        <link rel="stylesheet" href="idea.css">
+    </head>
+    <body>
+
+<!-- 修改头像显示部分 -->
+<div class="header-banner">
+<div class="user-info">
+    <img src="./user images/1.jpg" alt="用户头像" class="user-avatar" id="user-avatar">
+    <div class="user-details">
+        <h1 id="username">Tedlsv</h1>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 从 localStorage 获取保存的信息
+    const savedUsername = localStorage.getItem('username');
+    const savedEmail = localStorage.getItem('email');
+    const savedPhone = localStorage.getItem('phone');
+    const savedAddress = localStorage.getItem('address');
+    const savedAvatar = localStorage.getItem('userAvatar');
+    
+    // 更新头像显示
+    if (savedAvatar) {
+        document.getElementById('user-avatar').src = savedAvatar;
+    }
+    
+    // 更新其他信息显示
+    if (savedUsername) {
+        document.getElementById('username').textContent = savedUsername;
+        document.getElementById('profile-username').textContent = savedUsername;
+    }
+    // ... 其他信息更新保持不变 ...
+});
+</script>
+
+            <!-- 修改个人信息卡片中的用户名显示 -->
+            <div class="profile-info">
+                <div class="info-item">
+                </div>
+                <!-- ... 其他信息项保持不变 ... -->
+            </div>
+                
+                <!-- 修改个人信息卡片中的用户名显示 -->
+                <div class="profile-info">
+                    <div class="info-item">
+                    </div>
+                    <!-- ... 其他信息项保持不变 ... -->
+                </div>
+                
+                <!-- 添加 JavaScript -->
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // 从 localStorage 获取用户名
+                    const savedUsername = localStorage.getItem('username');
+                    
+                    if (savedUsername) {
+                        // 更新页面上所有显示用户名的地方
+                        document.getElementById('username').textContent = savedUsername;
+                        document.getElementById('profile-username').textContent = savedUsername;
+                    }
+                    
+                    // ... 其他现有的 JavaScript 代码 ...
+                });
+                </script>
+            </div>
+        </div>
+    
+        <div class="nav-bar">
+            <div class="search-bar">
+                <input type="text" class="search-input">
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item active" data-page="home">主页</li>
+            <!--    <li class="nav-item" data-page="settings">购物车</li> -->
+            </ul>
+        </div>
+    
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 主页内容 -->
+            <div class="page-content" id="home">
+                <!-- 添加个人信息区域 -->
+                <div class="profile-section">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <h2>个人信息</h2>
+                            <a href="edit.html" class="edit-button">编辑</a>
+                        </div>
+                        <div class="profile-info">
+                            <div class="info-item">
+                                <span class="info-label">用户名:</span>
+                                <span class="info-value" id="profile-username">Tedlsv</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">邮箱:</span>
+                                <span class="info-value" id="profile-email">2891931285@qq.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">联系方式:</span>
+                                <span class="info-value" id="profile-phone">18986813718</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">地址:</span>
+                                <span class="info-value" id="profile-address">湖北省武汉市洪山区张家湾街道武昌工学院</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 收藏内容 -->
+            <div class="page-content" id="favorite" style="display: none;">
+                <div class="book-grid">
+                    <!-- 收藏的书籍将在这里显示 -->
+                </div>
+            </div>
+        
+            <!-- 购物车内容 -->
+            <div class="page-content" id="settings" style="display: none;">
+                <div class="cart-grid">
+                    <!-- 购物车内容将在这里显示 -->
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 获取所有导航项和页面内容
+                const navItems = document.querySelectorAll('.nav-item');
+                const pages = document.querySelectorAll('.page-content');
+            
+                // 为每个导航项添加点击事件
+                navItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // 移除所有导航项的active类
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        
+                        // 为当前点击的导航项添加active类
+                        this.classList.add('active');
+            
+                        // 获取目标页面ID
+                        const targetPageId = this.getAttribute('data-page');
+            
+                        // 隐藏所有页面
+                        pages.forEach(page => {
+                            page.style.display = 'none';
+                        });
+            
+                        // 显示目标页面
+                        const targetPage = document.getElementById(targetPageId);
+                        if (targetPage) {
+                            targetPage.style.display = 'block';
+                        }
+                    });
+                });
+            
+                // 更新个人信息显示
+                const savedUsername = localStorage.getItem('username');
+                const savedEmail = localStorage.getItem('email');
+                const savedPhone = localStorage.getItem('phone');
+                const savedAddress = localStorage.getItem('address');
+                
+                if (savedUsername) {
+                    document.getElementById('username').textContent = savedUsername;
+                    document.getElementById('profile-username').textContent = savedUsername;
+                }
+                
+                if (savedEmail) {
+                    document.getElementById('profile-email').textContent = savedEmail;
+                }
+                
+                if (savedPhone) {
+                    document.getElementById('profile-phone').textContent = savedPhone;
+                }
+                if (savedAddress) {
+                    document.getElementById('profile-address').textContent = savedAddress;
+                }
+            
+                // 加载收藏的书籍
+                displayFavoriteBooks();
+            });
+            
+            // 显示收藏的书籍
+            function displayFavoriteBooks() {
+                const bookGrid = document.querySelector('.book-grid');
+                const favoriteBooks = JSON.parse(localStorage.getItem('favoriteBooks')) || [];
+                
+                if (bookGrid) {
+                    bookGrid.innerHTML = '';
+                    favoriteBooks.forEach(book => {
+                        const bookCard = createBookCard(book);
+                        bookGrid.appendChild(bookCard);
+                    });
+                }
+            }
+            
+            // 创建书籍卡片
+            function createBookCard(book) {
+                const card = document.createElement('div');
+                card.className = 'card book-card';
+                card.innerHTML = `
+                    <img src="${book.image}" alt="${book.title}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div class="book-info" style="padding: 10px;">
+                        <h3 style="margin: 0;">${book.title}</h3>
+                        <p style="color: #666;">${book.author}</p>
+                        <button onclick="removeFromFavorites('${book.id}')" 
+                                style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                            移除收藏
+                        </button>
+                    </div>
+                `;
+                return card;
+            }
+            
+            // 从收藏中移除
+            function removeFromFavorites(bookId) {
+                let favoriteBooks = JSON.parse(localStorage.getItem('favoriteBooks')) || [];
+                favoriteBooks = favoriteBooks.filter(book => book.id !== bookId);
+                localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks));
+                displayFavoriteBooks();
+            }
+            </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 获取所有导航项和页面内容
+                const navItems = document.querySelectorAll('.nav-item');
+                const pages = document.querySelectorAll('.page-content');
+            
+                // 设置默认显示的页面
+                document.getElementById('home').classList.add('active');
+            
+                // 为每个导航项添加点击事件
+                navItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // 移除所有导航项的active类
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        
+                        // 为当前点击的导航项添加active类
+                        this.classList.add('active');
+            
+                        // 获取目标页面ID
+                        const targetPageId = this.getAttribute('data-page');
+            
+                        // 隐藏所有页面
+                        pages.forEach(page => {
+                            page.classList.remove('active');
+                        });
+            
+                        // 显示目标页面
+                        const targetPage = document.getElementById(targetPageId);
+                        if (targetPage) {
+                            targetPage.classList.add('active');
+                        }
+                    });
+                });
+            
+                // 搜索功能
+                const searchInput = document.querySelector('.search-input');
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    // 这里添加搜索逻辑
+                    console.log('搜索:', searchTerm);
+                });
+            });
+            
+            // 页面切换动画效果
+            function switchPage(fromPage, toPage) {
+                fromPage.style.opacity = '0';
+                setTimeout(() => {
+                    fromPage.style.display = 'none';
+                    toPage.style.display = 'block';
+                    setTimeout(() => {
+                        toPage.style.opacity = '1';
+                    }, 50);
+                }, 300);
+            }
+            </script>
+            
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // 从 localStorage 获取保存的信息
+                    const savedUsername = localStorage.getItem('username');
+                    const savedEmail = localStorage.getItem('email');
+                    const savedPhone = localStorage.getItem('phone');
+                    const savedAddress = localStorage.getItem('Address');
+                    
+                    // 更新用户名显示（包括头部和个人信息卡片）
+                    if (savedUsername) {
+                        document.getElementById('username').textContent = savedUsername;
+                        document.getElementById('profile-username').textContent = savedUsername;
+                    }
+                    
+                    // 更新邮箱显示
+                    if (savedEmail) {
+                        document.getElementById('profile-email').textContent = savedEmail;
+                    }
+                    
+                    // 更新联系方式显示
+                    if (savedPhone) {
+                        document.getElementById('profile-phone').textContent = savedPhone;
+                    }
+                    if (savedAddress) {
+                        document.getElementById('profile-address').textContent = savedAddress;
+                    }
+                });
+                </script>
+                    
+            
+                <!-- 购物车内容 -->
+                <div class="page-content" id="settings" style="display: none;">
+                    <div class="video-grid">
+                        <!-- 购物车内容 -->
+                    </div>
+                </div>
+            </div>
+            
+    </body>

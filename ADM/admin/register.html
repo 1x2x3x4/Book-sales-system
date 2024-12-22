@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* 蓝白色背景 */
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #ffffff; /* 白色背景 */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555; /* 深灰色 */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* 浅灰色边框 */
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333; /* 深色 */
+            background-color: #f9f9f9; /* 浅灰色背景 */
+            transition: border-color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        .form-group input:focus {
+            border-color: #007bff; /* 聚焦时边框颜色变化 */
+        }
+
+        .form-group button {
+            padding: 12px 20px;
+            background-color: #007bff; /* 蓝色背景 */
+            color: white; /* 白色文字 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3; /* 深蓝色背景 */
+        }
+
+        .error {
+            color: #d9534f; /* 红色 */
+            font-size: 14px;
+        }
+
+        .success {
+            color: #5cb85c; /* 绿色 */
+            font-size: 14px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+            color: #007bff; /* 蓝色 */
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555; /* 深灰色 */
+        }
+
+        .login-link a {
+            color: #007bff; /* 蓝色 */
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 右边表单区域 -->
+        <div class="form-section">
+            <h1>注册</h1>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">用户名</label>
+                    <input type="text" id="regUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">密码</label>
+                    <input type="password" id="regPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">确认密码</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">注册</button>
+                </div>
+                <p id="regError" class="error"></p>
+                <p id="regSuccess" class="success"></p>
+            </form>
+            <div class="login-link">
+                <p>已有账号？<a href="login.html">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 注册功能
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // 验证密码规则
+            if (password.length < 6) {
+                document.getElementById('regError').innerText = '密码必须至少 6 位';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById('regError').innerText = '密码与确认密码不一致';
+                return;
+            }
+
+            // 检查用户名是否已存在
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.some(u => u.username === username);
+
+            if (userExists) {
+                document.getElementById('regError').innerText = '用户名已存在';
+            } else {
+                // 保存用户数据到 LocalStorage
+                users.push({ username, password });
+                localStorage.setItem('users', JSON.stringify(users));
+
+                document.getElementById('regSuccess').innerText = '注册成功，请登录';
+                document.getElementById('regError').innerText = '';
+                window.location.href = 'login.html'; // 注册成功后跳转到登录页面
+            }
+        });
+    </script>
+</body>
+</html>

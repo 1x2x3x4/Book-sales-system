@@ -1,0 +1,261 @@
+<!--
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 云间书阁</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>用户登录</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">登录</button>
+            <p class="register-link">
+                还没有账号？<a href="register.html">立即注册</a>
+            </p>
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>   -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* 蓝白色背景 */
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #ffffff; /* 白色背景 */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555; /* 深灰色 */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* 浅灰色边框 */
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333; /* 深色 */
+            background-color: #f9f9f9; /* 浅灰色背景 */
+            transition: border-color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        .form-group input:focus {
+            border-color: #007bff; /* 聚焦时边框颜色变化 */
+        }
+
+        .form-group button {
+            padding: 12px 20px;
+            background-color: #007bff; /* 蓝色背景 */
+            color: white; /* 白色文字 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3; /* 深蓝色背景 */
+        }
+
+        .error {
+            color: #d9534f; /* 红色 */
+            font-size: 14px;
+        }
+
+        .success {
+            color: #5cb85c; /* 绿色 */
+            font-size: 14px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+            color: #007bff; /* 蓝色 */
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555; /* 深灰色 */
+        }
+
+        .register-link a {
+            color: #007bff; /* 蓝色 */
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .login-type {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .login-type button {
+            padding: 10px 20px;
+            background-color: #f0f8ff; /* 浅蓝色背景 */
+            color: #007bff; /* 蓝色文字 */
+            border: 1px solid #007bff; /* 蓝色边框 */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* 平滑过渡效果 */
+        }
+
+        .login-type button.active {
+            background-color: #007bff; /* 蓝色背景 */
+            color: white; /* 白色文字 */
+        }
+
+        .login-type button:hover {
+            background-color: #0056b3; /* 深蓝色背景 */
+            color: white; /* 白色文字 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 右边表单区域 -->
+        <div class="form-section">
+            <h1>登录</h1>
+            <div class="login-type">
+                <button id="userLoginButton" class="active">用户登录</button>
+                <button id="adminLoginButton">管理员登录</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">登录</button>
+                </div>
+                <p id="loginError" class="error"></p>
+                <p id="loginSuccess" class="success"></p>
+            </form>
+            <div class="register-link">
+                <p>还没有账号？<a href="register.html">立即注册</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isAdminLogin = false; // 默认是用户登录
+
+        // 切换登录类型
+        document.getElementById('userLoginButton').addEventListener('click', function() {
+            isAdminLogin = false;
+            this.classList.add('active');
+            document.getElementById('adminLoginButton').classList.remove('active');
+        });
+
+        document.getElementById('adminLoginButton').addEventListener('click', function() {
+            isAdminLogin = true;
+            this.classList.add('active');
+            document.getElementById('userLoginButton').classList.remove('active');
+        });
+
+        // 登录功能
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // 从 LocalStorage 获取用户数据
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            let user;
+            if (isAdminLogin) {
+                // 固定管理员账号
+                const adminUsername = 'admin';
+                const adminPassword = 'admin123';
+
+                if (username === adminUsername && password === adminPassword) {
+                    user = { username: adminUsername, password: adminPassword };
+                } else {
+                    document.getElementById('loginError').innerText = '管理员用户名或密码错误';
+                    return;
+                }
+            } else {
+                user = users.find(u => u.username === username && u.password === password);
+            }
+
+            if (user) {
+                document.getElementById('loginSuccess').innerText = '登录成功';
+                document.getElementById('loginError').innerText = '';
+
+                // 根据登录类型跳转到不同页面
+                if (isAdminLogin) {
+                    window.location.href = '../../ADM/admin/index.html'; // 管理员后台页面
+                } else {
+                    window.location.href = `../../SEARCH/index user.html?username=${username}`; // 用户首页
+                }
+            } else {
+                // 显示警示框
+                alert('该账号未注册');
+                document.getElementById('loginError').innerText = '用户名或密码错误';
+                // 跳转到注册页面
+                window.location.href = 'register.html';
+            }
+        });
+    </script>
+</body>
+</html>

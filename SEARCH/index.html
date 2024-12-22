@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <title>云间书阁</title>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="user-status">
+                <div id="userInfo"></div>
+                <div class="nav-links" id="guestNav">
+                    <a href="./AUTH/public/login.html" id="loginLink">登录</a>
+                    <a href="/AUTH/public/register.html" id="registerLink">注册</a>
+                </div>
+                
+                <div class="nav-links" id="userNav" style="display: none;">
+                    <a href="/USER CENTER/user/user.html" id="userCenterLink">个人中心</a>
+                    <a href="#" id="logoutLink">退出登录</a>
+                </div>
+            </div>
+            <h1>云间书阁</h1>
+            <p class="subtitle">品味书香，悦享人生</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索书籍或作者...">
+                <button id="searchButton">搜索</button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main id="bookList" class="book-list">
+            <!-- 书籍列表将在这里动态生成 -->
+        </main>
+        
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h2>价格筛选</h2>
+                <div class="price-filter">
+                    <div class="price-inputs">
+                        <input type="number" id="minPrice" placeholder="最低价" min="0">
+                        <span>-</span>
+                        <input type="number" id="maxPrice" placeholder="最高价" min="0">
+                    </div>
+                    <button onclick="applyPriceFilter()" class="filter-btn">筛选</button>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h2>图书分类</h2>
+                <ul class="category-list">
+                    <li><a href="#" data-category="all">全部作品</a></li>
+                    <li><a href="#" data-category="literature">文学小说</a></li>
+                    <li><a href="#" data-category="history">历史传记</a></li>
+                    <li><a href="#" data-category="philosophy">哲学思想</a></li>
+                    <li><a href="#" data-category="art">艺术设计</a></li>
+                    <li><a href="#" data-category="science">科学技术</a></li>
+                    <li><a href="#" data-category="life">生活休闲</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <p>© 2024 云间书阁 - 让阅读成为一种享受</p>
+    </footer>
+    
+    <script src="search.js"></script>
+</body>
+</html>

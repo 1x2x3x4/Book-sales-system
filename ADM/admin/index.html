@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云间书阁 - 管理员后台</title>
+    <!-- 导入css样式文件 -->
+    <link rel="stylesheet" href="styles.css">
+     <!-- 引入 Chart.js -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- 引入 Socket.IO 客户端库 -->
+     <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+    <!-- 模态窗口 -->
+    <div id="book-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <form id="book-form">
+                <h2 id="form-title">新增书籍</h2> <!-- 新增的表单标题 -->
+                <input type="hidden" id="book-id" name="book-id">
+                <label>
+                    书名:
+                    <input type="text" id="title" name="title" required>
+                </label>
+                <label>
+                    作者:
+                    <input type="text" id="author" name="author" required>
+                </label>
+                <label>
+                    分类:
+                    <input type="text" id="category" name="category" required>
+                </label>
+                <label>
+                    封面图片路径:
+                    <input type="text" id="coverImage" name="coverImage" required placeholder="例如: images/books/活着.jpg">
+                </label>
+                <label>
+                    描述:
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </label>
+                <label>
+                    原价:
+                    <input type="number" id="originalPrice" name="originalPrice" required min="0" step="0.01" oninput="updateCurrentPrice()">
+                </label>
+                <label>
+                    折扣:
+                    <input type="number" id="discount" name="discount" required min="0" max="1" step="0.01" oninput="updateCurrentPrice()">
+                </label>
+                <label>
+                    现价:
+                    <input type="number" id="currentPrice" name="currentPrice" required min="0" step="0.01" readonly>
+                </label>
+                <label>
+                    库存:
+                    <input type="number" id="stock" name="stock" required min="0" step="1">
+                </label>
+                <label>
+                    ISBN:
+                    <input type="text" id="isbn" name="isbn" required>
+                </label>
+                <label>
+                    出版社:
+                    <input type="text" id="publisher" name="publisher" required>
+                </label>
+                <button type="submit">提交</button>
+                <button type="button" id="cancel-button" style="display: none;">取消</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <h1>云间书阁后台</h1>
+        <button class="logout-button" id="logout-button">登出</button>
+    </div>
+
+    <div class="content">
+        <!-- 左侧侧边栏 -->
+        <div class="sidebar">
+            <h2>云间书阁后台</h2>
+            <ul>
+                <li data-page="dashboard" class="active">首页</li>
+                <li data-page="site-management">站点管理</li>
+                <li data-page="content-management">内容管理</li>
+                <li data-page="order-content">订单信息</li>
+                <li data-page="developing">开发中...</li>
+            </ul>
+        </div>
+
+        <!-- 右侧主内容区域 -->
+        <div class="main-content">
+            <!-- 首页显示 -->
+            <div class="dashboard">
+                <h2>欢迎来到后台首页</h2>
+                <p>这里是后台管理的起始页面。</p>
+            </div>
+
+            <!-- 站点管理页面内容（统计信息示例） -->
+            <div class="site-management-content">
+                <h2>站点统计</h2>
+                <p>这里可以展示各种统计数据和图表</p>
+                <ul>
+                    <li>总访问量：12345</li>
+                    <li>新增用户：234</li>
+                    <li>今日订单：56</li>
+                    <li>库存告警商品数：10</li>
+                </ul>
+                <img src="/images/graph.png" alt="" class="graph">
+                
+                <h2>图书库存饼图</h2>
+                <div id="chartContainer">
+                    <canvas id="stockChart"></canvas>
+                </div>
+
+            </div>
+
+            <!-- 内容管理页面内容（书籍列表） -->
+            <div class="books-content">
+                <!-- 查询和操作按钮区域 -->
+                <div class="filter-bar">
+                    <input type="text" id="search-title" placeholder="书名">
+                    <input type="text" id="search-author" placeholder="作者名">
+                    <input type="text" id="search-category" placeholder="分类">
+                    <input type="text" id="search-isbn" placeholder="ISBN">
+                    <button id="search-button">查询</button>
+                    <button class="reset-btn" id="reset-button">重置</button>
+                    <button class="add-btn" id="open-modal-button">添加图书</button>
+                    <button class="delete-btn">删除</button>
+                </div>
+                <h2>书籍列表</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="ALL"></th>
+                            <th>ID</th>
+                            <th>封面</th>
+                            <th>书名</th>
+                            <th>作者</th>
+                            <th>分类</th>
+                            <th>价格</th>
+                            <th>折扣</th>
+                            <th>库存</th>
+                            <th>ISBN</th>
+                            <th>出版社</th>
+                            <th>描述</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="books-table-body">
+                        <!-- 动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 订单信息页面内容 -->
+            <div class="order-content">
+               <h2>订单信息</h2>
+               <select>
+                   <option value="">收货人</option>
+                   <option value="收货人1">收货人1</option>
+                   <option value="收货人2">收货人2</option>
+               </select>
+               <input type="text" placeholder="订单编号">
+               <button>查询</button>
+            </div>
+
+            <!-- 开发中页面内容 -->
+            <div class="developing-content" style="display:none; padding:20px;">
+               <h2>功能开发中...</h2>
+               <p>此模块正在建设中，敬请期待。</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 导入js文件 -->
+    <script src="scripts.js"></script>
+</body>
+</html>

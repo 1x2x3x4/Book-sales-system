@@ -1,0 +1,250 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* 头部背景 */
+.header-banner {
+    height: 170px;
+    background: linear-gradient(45deg, #110f10, #aca1ad);
+    position: relative;
+}
+
+/* 用户信息区 */
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.user-details h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+/* 导航栏 */
+.nav-bar {
+    background: #fff;
+    padding: 0 20px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.nav-item {
+    padding: 15px 0;
+    color: #18191c;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-item.active {
+    color: #00aeec;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00aeec;
+}
+
+/* 内容区域 */
+.content {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* 视频网格 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.video-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 150px;
+    background: #eee;
+    position: relative;
+}
+
+.video-info {
+    padding: 10px;
+}
+
+.video-title {
+    margin: 0;
+    font-size: 14px;
+    color: #18191c;
+}
+
+.video-meta {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #9499a0;
+}
+
+/* 搜索框 */
+.search-bar {
+    float: right;
+    margin: 10px 0;
+}
+
+.search-input {
+    padding: 8px 15px;
+    border: 1px solid #e7e7e7;
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+}
+.profile-section {
+margin-bottom: 30px;
+}
+
+.profile-card {
+background: #fff;
+border-radius: 8px;
+padding: 20px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+padding-bottom: 10px;
+border-bottom: 1px solid #eee;
+}
+
+.profile-header h2 {
+margin: 0;
+font-size: 18px;
+color: #18191c;
+}
+
+.edit-button {
+padding: 6px 16px;
+background-color: #00aeec;
+color: #fff;
+text-decoration: none;
+border-radius: 4px;
+font-size: 14px;
+transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+background-color: #0095cc;
+}
+
+.profile-info {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.info-item {
+display: flex;
+align-items: center;
+}
+
+.info-label {
+width: 80px;
+color: #666;
+font-size: 14px;
+}
+
+.info-value {
+color: #18191c;
+font-size: 14px;
+}
+
+.page-content {
+display: none;
+padding: 20px;
+}
+
+#home {
+display: block;
+}
+
+/* 书籍网格样式 */
+.book-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 20px;
+}
+
+/* 购物车网格样式 */
+.cart-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 20px;
+}
+
+/* 卡片通用样式 */
+.card {
+background: #fff;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 导航项样式 */
+.nav-item {
+cursor: pointer;
+padding: 15px 20px;
+position: relative;
+}
+
+.nav-item.active {
+color: #00aeec;
+}
+
+.nav-item.active::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 2px;
+background: #00aeec;
+}
+
+.user-avatar {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 3px solid #fff;
+object-fit: cover;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

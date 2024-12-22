@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .user-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎来到首页</h1>
+        <div class="user-info" id="userInfo">
+            <p>未登录</p>
+        </div>
+        <button id="logoutButton">退出登录</button>
+    </div>
+
+    <script>
+        // 获取 URL 中的用户名参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+
+        // 显示欢迎信息
+        if (username) {
+            alert(`欢迎，${username}`);
+            document.getElementById('userInfo').innerHTML = `<p>欢迎，${username}</p>`;
+        }
+
+        // 登出功能
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            if (confirm('确认退出登录吗？')) {
+                document.cookie = 'rememberMe=; max-age=0'; // 清除 Cookie
+                window.location.href = 'login.html'; // 重定向到登录页面
+            }
+        });
+    </script>
+</body>
+</html>
