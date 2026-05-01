@@ -50,11 +50,3 @@ http://localhost:3000
 
 - Node.js
 - npm
-
-## 贡献与反馈
-
-欢迎提交 issue 或 pull request 进行功能完善与 bug 修复。
-
----
-
-如需补充详细接口文档或使用说明，请告知你的具体需求。
